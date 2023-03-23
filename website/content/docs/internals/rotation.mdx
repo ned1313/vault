@@ -13,7 +13,7 @@ compromise. It is useful to first understand the
 
 As a review, Vault starts in a _sealed_ state. Vault is unsealed by providing the unseal keys.
 By default, Vault uses a technique known as [Shamir's secret sharing algorithm](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing)
-to split the root key into 5 shares, any 3 of which are required to reconstruct the master
+to split the root key into 5 shares, any 3 of which are required to reconstruct the root
 key. The root key is used to protect the encryption key, which is ultimately used to protect
 data written to the storage backend.
 
@@ -30,7 +30,7 @@ performing a rekey and invalidating the existing root key.
 
 Performing a rekey is fairly straightforward. The rekey operation must be initialized with
 the new parameters for the split and threshold. Once initialized, the current unseal keys
-must be provided until the threshold is met. Once met, Vault will generate the new master
+must be provided until the threshold is met. Once met, Vault will generate the new root
 key, perform the splitting, and re-encrypt the encryption key with the new root key.
 The new unseal keys are then provided to the operator, and the old unseal keys are no
 longer usable.
